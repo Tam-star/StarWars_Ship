@@ -1,0 +1,11 @@
+{
+  "name": "star",
+  "version": "1.0.0",
+  "description": "",
+  "main": "planets_script.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/star.scss:.css/sassy_star.css"
+  },
+  "author": "\"\"",
+  "license": "ISC"
+}
