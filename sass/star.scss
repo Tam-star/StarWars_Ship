@@ -1,5 +1,16 @@
 :root{
-    --main-color:rgb(39, 39, 41);
+    --first_globe_color : #bd592b;
+    --second_globe_color : #b89455; 
+    --third_globe_color : #db821b;
+
+}
+@mixin light_button ($colour1, $colour2) {
+    background: radial-gradient(circle, #ffffff 50%, $colour1 74%, $colour2 100%);
+    width:40px;
+    height:40px;
+    border: solid black 1px;
+    box-shadow: 1px 2px 2px black, -1px -1px 2px black;
+    margin:10px;
 }
 
 @font-face {
@@ -54,10 +65,29 @@ h2{
     align-items: center;
 }
 
+#light_buttons_container{
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 300px;
+    height: 200px;
+
+}
+
+.blue_light_button{
+    @include light_button(#00beff,#0005ff);
+}
+
+.green_light_button{
+    @include light_button(#7dff29,#00ac0b);
+}
+
 #high_speed_button{
     height:200px;
-    margin-right: 200px;
     cursor: pointer;
+    margin-right: 50px;
+    margin-left: 50px;
 }
 
 
@@ -68,7 +98,7 @@ h2{
     display: flex;
     justify-content:center;
     align-items: center;
-    background-color:var(--main-color);
+    background-color:rgb(39, 39, 41);
 }
 
 .slick-arrow{
@@ -89,6 +119,26 @@ h2{
     100% {opacity:1;}
 }
 
+@keyframes appear-animation{
+    0%   {opacity:0;}
+    100% {opacity:1;}
+}
+
+@keyframes disappear-animation{
+    0%   {opacity:1;}
+    100% {opacity:0;}
+}
+
+.appear{
+    animation-name:appear-animation;
+    animation-duration : 1.5s;
+}
+
+.disappear{
+    animation-name:disappear-animation;
+    animation-duration : 1.5s;
+}
+
 .container_animation{
     animation-name:opacity-animation;
     animation-duration : 1.5s;
@@ -103,24 +153,19 @@ h2{
     padding:15px;
     overflow: auto;
     font-family: Helvetica, sans-serif;
-    &__description{
-        //background-color: green;
-    }
-    &__globe{
-        //background-color: red;
-    }
 }
 
 .bold{
     font-weight: bold;
 }
 
+//Planet Animation
 @keyframes rotate {
     0% {background-position: 0 0;}
     100% {background-position: 630px 0;}
   }
 
-#earth {
+#globe {
     /* [1] Allow it to contain the absolutely positions pseudo-elements (later-on) */
     position: relative;
   
@@ -133,22 +178,16 @@ h2{
     transition: transform 200ms linear;
     animation: rotate 8s linear infinite; /* This is going to be defined in the next step */
   
-    /* [4] Tweak the appearance, and give it a nice background i.e. the world map */
-    color: #000;
     border-radius: 50%;
-    //background: url(path/to/world-map-image) 0 0 repeat / 630px;
-    //background: url("earth_map.jpg") 0 0 repeat;
     background-size: 630px;
-    //background-image: linear-gradient(to right, #DECBA4, #3E5151, #DECBA4);
-    background-image: radial-gradient(rgb(240, 132, 30), #DECBA4, #3E5151);
-    //background: linear-gradient(90deg, #fcff9e, #c67700, #fcff9e);
+    background-image: radial-gradient(var(--first_globe_color) 30%,var(--second_globe_color) 55%, var(--third_globe_color) 100%);
     box-shadow: inset 20px 0 80px 6px rgba(0, 0, 0, 1);
   
     /* [5] Position things in a 3d space */
     transform-style: preserve-3d;
   }
 
-  #earth:after {
+  #globe::after {
     /* [1] Break the flow to show this as an overlay */
     position: absolute;
     top: 0;
@@ -166,7 +205,7 @@ h2{
     box-shadow: -80px 15px 80px 10px rgba(0,0,0,.9) inset;
   }
 
-  #earth:before {
+  #globe::before {
     /* [1] Again, break the flow to show this as an overlay */
     position: absolute;
     top: 0;
