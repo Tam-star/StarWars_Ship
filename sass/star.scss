@@ -17,6 +17,10 @@
     font-family: 'StarJedi';
     src: url('star-jedi/starjedi/Starjedi.ttf');
 }
+@font-face {
+    font-family: 'TypeWriter';
+    src: url('atwriter.ttf');
+}
 
 *{
     color: white;
@@ -34,6 +38,22 @@ body{
     margin-right:0;
 }
 
+@keyframes hyperdrive_window{
+    0% {
+        transform: scale(1.0);
+      }
+      100% {
+        transform: scale(2.0);
+        height:800px;
+        background:white;
+      }
+}
+
+.hyperdrive_animation{
+    animation-name: hyperdrive_window;
+    animation-duration: 2s;
+}
+
 #window{
     width: max-width;
     height:350px;
@@ -49,15 +69,15 @@ body{
 
 @keyframes mystarmove {
     0% {
-      left: 200px;
-      opacity:0.2;
+        transform: translateX(0);
+        opacity:0.2;
     }
     80%{
         opacity: 1;
     }
     100% {
-      left: 300px;
-      opacity: 0;
+        transform: translateX(100px);
+        opacity: 0;
     }
   }
 
@@ -84,7 +104,6 @@ body{
   .star {
     position: absolute;
     background-color: white;
-    top: 200px;
     width: 2px;
     height: 2px;
     border-radius: 50%;
@@ -114,20 +133,31 @@ body{
 
 h1{
     font-family: StarJedi, Arial, Helvetica, sans-serif;
-    font-size: 60px;
+    font-size: 55px;
     text-align: center;
+    margin:10px;
 }
 
-h2{
-    font-family: Helvetica, sans-serif;
-    font-size: 40px;
-    text-align: center;
-}
 
 #tableau_de_bord{
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+#screen_text_container{
+    background-color:black;
+    height:50px;
+    width: 350px;
+    border: 5px outset rgb(94, 88, 88);
+    padding-left:10px;
+    & h5{
+        font-family: StarJedi, Arial, Helvetica, sans-serif;
+        margin:0;
+    }
+    & p{
+        font-family: TypeWriter,Helvetica, sans-serif;
+    }
 }
 
 #light_buttons_container{
@@ -137,7 +167,6 @@ h2{
     align-items: center;
     width: 300px;
     height: 200px;
-
 }
 
 .blue_light_button{
@@ -158,8 +187,8 @@ h2{
 
 #center_container{
     border: 5px outset rgb(94, 88, 88);
-    padding: 5px;
-    width : 700px;
+    padding : 5px 20px 5px 20px;
+    width : 650px;
     display: flex;
     justify-content:center;
     align-items: center;
@@ -171,8 +200,6 @@ h2{
     cursor: pointer;
     transform: scale(1);
     transition: transform 200ms;
-    margin-left: 10px;
-    margin-right: 10px;
     &:hover {
         transform:scale(1.15);
     }

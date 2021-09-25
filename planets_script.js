@@ -8,6 +8,9 @@ const planet_population= document.getElementById("planet_pop");
 const planet_distance = document.getElementById("planet_distance");
 const planet_globe = document.getElementById("planet_globe");
 const arrows = document.getElementsByClassName("slick-arrow");
+const window_stars = document.getElementById("window");
+const red_button = document.getElementById("high_speed_button");
+const tableau_de_bord = document.getElementById("tableau_de_bord");
 
 // Get the root element
 var r = document.querySelector(':root');
@@ -157,12 +160,43 @@ function changePlanetColor(){
       }
 
 
-const randomColor = () => {
+function randomColor(){
   let color = '#';
   for (let i = 0; i < 6; i++){
-     const random = Math.random();
-     const bit = (random * 16) | 0;
+     let random = Math.random();
+     let bit = (random * 16) | 0;
      color += (bit).toString(16);
   };
   return color;
 };
+
+function letsHyperdrive() {
+  setTimeout(function(){
+        location.reload();
+        }, 2000);
+ window_stars.classList.add('hyperdrive_animation');
+ tableau_de_bord.classList.add('disappear')
+ window_stars.removeChild(document.querySelector("h1"));
+ document.querySelector("body").removeChild(document.getElementById("tableau_de_bord"));
+ 
+}
+
+red_button.addEventListener("click", function(){ 
+  letsHyperdrive();
+});
+
+
+//STARS IN WINDOW
+const mystars = document.getElementsByClassName("star");
+for(let i=0;i<mystars.length;i++){
+    
+    let top=Math.floor(Math.random() * (340 - 40) + 40);
+    console.log("TOP "+top);
+    let left=Math.floor(Math.random() * (1300 - 10) + 10);
+    console.log("LEFT "+left);
+    mystars[i].style.setProperty('top', top+"px");
+    mystars[i].style.setProperty('left', left+"px");
+}
+
+//TO DO
+//I want the animation of the stars to be random
