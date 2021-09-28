@@ -1,0 +1,346 @@
+:root {
+  --first_globe_color: #bd592b;
+  --second_globe_color: #b89455;
+  --third_globe_color: #db821b;
+}
+
+@font-face {
+  font-family: "StarJedi";
+  src: url("star-jedi/starjedi/Starjedi.ttf");
+}
+@font-face {
+  font-family: "TypeWriter";
+  src: url("atwriter.ttf");
+}
+* {
+  color: white;
+}
+
+html {
+  background: linear-gradient(90deg, #999090 0%, #1a1a1b 35%, whitesmoke 100%, #837c7c 100%);
+  height: 100%;
+}
+
+body {
+  width: max-width;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes hyperdrive_window {
+  0% {
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, 0);
+  }
+  80% {
+    transform: scale(2.5);
+    height: 100vh;
+  }
+  100% {
+    transform: scale(2.5);
+    height: 100vh;
+    border: none;
+    background-image: none;
+    background-color: white;
+  }
+}
+.hyperdrive_animation {
+  animation-name: hyperdrive_window;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.82, 0, 1, 1);
+}
+
+#window {
+  width: max-width;
+  height: 350px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-image: url("milky_way.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-top: 15px ridge #5e5858;
+  border-bottom: 15px ridge #5e5858;
+}
+
+@keyframes mystarmove {
+  0% {
+    transform: translateX(0);
+    opacity: 0.2;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+}
+@keyframes starboxshadowMove {
+  from {
+    box-shadow: 0px 0px 12px 5px white;
+  }
+  to {
+    box-shadow: 0px 0px 12px 4px white;
+  }
+}
+@keyframes trace {
+  0% {
+    width: 0px;
+  }
+  50% {
+    width: 60px;
+  }
+  100% {
+    width: 0px;
+  }
+}
+.star {
+  position: relative;
+  background-color: white;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  animation: mystarmove 10s infinite ease-out;
+}
+
+.star::before {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 0.5px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.089) 0%, rgba(255, 255, 255, 0.438) 20%, white 100%);
+  height: 0.5px;
+  animation: trace 10s infinite cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0px 0px 6px 1px white;
+}
+
+.star::after {
+  content: "";
+  position: absolute;
+  background-color: transparent;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  animation: starboxshadowMove 0.8s infinite;
+}
+
+h1 {
+  font-family: StarJedi, Arial, Helvetica, sans-serif;
+  font-size: 55px;
+  text-align: center;
+  margin: 10px;
+}
+
+#tableau_de_bord {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#screen_text_container {
+  background-color: black;
+  height: 50px;
+  width: 300px;
+  border: 5px outset #5e5858;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#screen_text_container h5 {
+  font-family: StarJedi, Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+#screen_text_container p {
+  font-family: TypeWriter, Helvetica, sans-serif;
+}
+
+#light_buttons_container {
+  display: flex;
+  padding: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+}
+
+.blue_light_button {
+  background: radial-gradient(circle, #ffffff 50%, #00beff 74%, #0005ff 100%);
+  width: 40px;
+  height: 40px;
+  border: solid black 1px;
+  box-shadow: 1px 2px 2px black, -1px -1px 2px black;
+  margin: 10px;
+}
+
+.green_light_button {
+  background: radial-gradient(circle, #ffffff 50%, #7dff29 74%, #00ac0b 100%);
+  width: 40px;
+  height: 40px;
+  border: solid black 1px;
+  box-shadow: 1px 2px 2px black, -1px -1px 2px black;
+  margin: 10px;
+}
+
+#high_speed_button {
+  height: 150px;
+  cursor: pointer;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+#left_container {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#center_container {
+  border: 5px outset #5e5858;
+  padding: 5px 20px 5px 20px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #272729;
+}
+
+#right_container {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+}
+
+.slick-arrow {
+  height: 50px;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 200ms;
+}
+.slick-arrow:hover {
+  transform: scale(1.15);
+}
+
+@keyframes appear-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes disappear-animation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.appear {
+  animation-name: appear-animation;
+  animation-duration: 1.5s;
+}
+
+.disappear {
+  animation-name: disappear-animation;
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+}
+
+#planet_container {
+  display: flex;
+  justify-content: space-around;
+  width: 550px;
+  height: 300px;
+  margin: auto;
+  padding: 15px;
+  font-family: Helvetica, sans-serif;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+@keyframes rotate {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 630px 0;
+  }
+}
+#globe {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 3em auto;
+  transition: transform 200ms linear;
+  animation: rotate 8s linear infinite;
+  border-radius: 50%;
+  background-size: 630px;
+  background-image: radial-gradient(var(--first_globe_color) 30%, var(--second_globe_color) 55%, var(--third_globe_color) 100%);
+  box-shadow: inset 20px 0 80px 6px black;
+  transform-style: preserve-3d;
+}
+
+#globe::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  border-radius: 50%;
+  box-shadow: -80px 15px 80px 10px rgba(0, 0, 0, 0.9) inset;
+}
+
+#globe::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  opacity: 0.2;
+  border-radius: 50%;
+  background: radial-gradient(circle at 100px 100px, #fff, #000);
+}
+
+@media screen and (max-width: 1280px) {
+  html {
+    width: 100%;
+  }
+
+  #left_container, #center_container, #right_container {
+    width: auto;
+    margin: auto;
+  }
+
+  #tableau_de_bord {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 710px) {
+  #planet_container {
+    flex-direction: column;
+    width: auto;
+    height: auto;
+  }
+
+  #screen_text_container {
+    height: auto;
+  }
+}
+@media screen and (max-width: 400px) {
+  #globe {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/*# sourceMappingURL=sassy_star.css.map */
