@@ -11,14 +11,15 @@ const arrows = document.getElementsByClassName("slick-arrow");
 const window_stars = document.getElementById("window");
 const red_button = document.getElementById("high_speed_button");
 const tableau_de_bord = document.getElementById("tableau_de_bord");
+const screen_text = document.getElementById("screen_text");
 
 // Get the root element
 var r = document.querySelector(':root');
 
 let planet_id = 1;
 
-async function getPlanet(id){
-  //console.log("getplanet "+Date.now());
+function getPlanet(id){
+  return new Promise((resolve,reject)=>{
     const url = 'https://swapi.dev/api/planets/'+id;
     const options={
         method : 'GET', 
@@ -36,17 +37,19 @@ async function getPlanet(id){
         planet_rotation_p.textContent=JSON.stringify(data.rotation_period).replaceAll('"','');
         planet_population.textContent=JSON.stringify(data.population).replaceAll('"','');
         planet_distance.textContent=randomLightYears();
-        
+        resolve();   
     })   
-    .catch(err =>console.log("Il y a erreur", err))
+    .catch(err =>{
+        console.log("Il y a erreur", err);
+        screen_text.textContent="Something is wrong Captain...";
+      })
     .catch(err =>console.log("Il y a erreur json", err))
-    return await Promise.resolve();
-   }
+  });
+  }
 
 
 
 function randomLightYears(){
-    // Returns a random integer from 1 to 5000
    return Math.floor(Math.random() * 5000) + 1;
 }
 
@@ -60,18 +63,7 @@ arrows[0].addEventListener("click", function(){
   else{
     planet_id-=1;
   }
-  planet_container.classList.add('disappear');
-  console.log("add disappear"+Date.now());
-  getPlanet(planet_id).then( (response) => {
-      //console.log("getplanet "+Date.now());
-      changePlanetColor(planet_id);
-      planet_container.classList.remove('disappear');
-      planet_container.classList.add('appear');
-      setTimeout(function(){
-        //console.log("removing appear in 1.2s  " +Date.now());
-        planet_container.classList.remove('appear');
-        }, 1500); //Turning off button until animation is over ???
-    });
+  changePlanet(planet_id);  
 });
 
 //NEXT ARROW
@@ -82,22 +74,21 @@ arrows[1].addEventListener("click", function(){
   else{
     planet_id+=1;
   }
-  planet_container.classList.add('disappear');
-  //console.log("add disappear"+Date.now());
-  getPlanet(planet_id).then( (response) => {
-      changePlanetColor(planet_id);
-      planet_container.classList.remove('disappear');
-      planet_container.classList.add('appear');
-      setTimeout(function(){
-        //console.log("removing appear in 1.2s  " +Date.now());
-        planet_container.classList.remove('appear');
-        }, 1500); //Turning off next button until animation is over ???
-    });
-      
+  changePlanet(planet_id);   
   });
 
 
-getPlanet(planet_id);
+  async function changePlanet(planet_id){
+    planet_container.classList.add('disappear');
+    await getPlanet(planet_id);
+    changePlanetColor(planet_id);
+    planet_container.classList.remove('disappear');
+    planet_container.classList.add('appear');
+    setTimeout(function(){
+        planet_container.classList.remove('appear');
+        }, 1500);
+ } 
+
 
 function changePlanetColor(){
         switch(planet_id){
@@ -173,11 +164,18 @@ function randomColor(){
 function letsHyperdrive() {
   setTimeout(function(){
         location.reload();
-        }, 2000);
- window_stars.classList.add('hyperdrive_animation');
- tableau_de_bord.classList.add('disappear')
- window_stars.removeChild(document.querySelector("h1"));
- document.querySelector("body").removeChild(document.getElementById("tableau_de_bord"));
+        }, 6000);
+ tableau_de_bord.classList.add('disappear');
+ document.querySelector("h1").classList.add('disappear');
+ document.querySelector("body").style.setProperty('overflow', 'hidden');
+ for(let i=0;i<mystars.length;i++){
+  mystars[i].style.setProperty('display', 'none');
+ }
+ setTimeout(function(){
+    window_stars.classList.add('hyperdrive_animation');
+    document.querySelector("body").removeChild(tableau_de_bord);
+  }, 1500);
+ //window_stars.removeChild(document.querySelector("h1"));
  
 }
 
@@ -189,14 +187,17 @@ red_button.addEventListener("click", function(){
 //STARS IN WINDOW
 const mystars = document.getElementsByClassName("star");
 for(let i=0;i<mystars.length;i++){
-    
-    let top=Math.floor(Math.random() * (340 - 40) + 40);
-    console.log("TOP "+top);
-    let left=Math.floor(Math.random() * (1300 - 10) + 10);
-    console.log("LEFT "+left);
-    mystars[i].style.setProperty('top', top+"px");
-    mystars[i].style.setProperty('left', left+"px");
+    let top=Math.floor(Math.random() * (98));
+    let left=Math.floor(Math.random() * (90));
+    mystars[i].style.setProperty('top', top+"%");
+    mystars[i].style.setProperty('left', left+"%");
 }
 
 //TO DO
 //I want the animation of the stars to be random
+
+getPlanet(planet_id);
+// document.querySelector("body").removeChild(tableau_de_bord);
+// window_stars.style.setProperty('height','100vh');
+// window_stars.style.setProperty('margin','0');
+// document.querySelector("html").style.setProperty('margin','0');

@@ -28,31 +28,43 @@
 
 html{
     background: linear-gradient(90deg, rgb(153, 144, 144) 0%, rgb(26, 26, 27) 35%, rgba(245,245,245,1) 100%, rgb(131, 124, 124) 100%);
-    background-size: cover;
     height: 100%;
+    //margin-top:-15px;
+   // padding-bottom: 15px;
 }
 
 body{
     width: max-width;
-    margin-left:0;
-    margin-right:0;
+    margin:0;
+    padding:0;
 }
 
 @keyframes hyperdrive_window{
     0% {
         transform: scale(1.0);
+        background-color:rgba(0, 0, 0, 0) ;
+      }
+      80%{
+        transform: scale(2.5);
+        height:100vh;
       }
       100% {
-        transform: scale(2.0);
-        height:800px;
-        background:white;
+        transform: scale(2.5);
+        height:100vh;
+        border:none;
+        background-image: none;
+        background-color:white;
       }
 }
 
 .hyperdrive_animation{
     animation-name: hyperdrive_window;
     animation-duration: 2s;
+    animation-fill-mode:forwards;
+    animation-timing-function: cubic-bezier(0.82, 0, 1, 1);
 }
+
+
 
 #window{
     width: max-width;
@@ -102,7 +114,7 @@ body{
   }
 
   .star {
-    position: absolute;
+    position: relative; //not absolute so the stars won't go out the window...
     background-color: white;
     width: 2px;
     height: 2px;
@@ -148,9 +160,10 @@ h1{
 #screen_text_container{
     background-color:black;
     height:50px;
-    width: 350px;
+    width: 300px;
     border: 5px outset rgb(94, 88, 88);
     padding-left:10px;
+    padding-right: 10px;
     & h5{
         font-family: StarJedi, Arial, Helvetica, sans-serif;
         margin:0;
@@ -178,21 +191,37 @@ h1{
 }
 
 #high_speed_button{
-    height:200px;
+    height:150px;
     cursor: pointer;
     margin-right: 50px;
     margin-left: 50px;
 }
 
+#left_container{
+  width:25%;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 #center_container{
     border: 5px outset rgb(94, 88, 88);
     padding : 5px 20px 5px 20px;
-    width : 650px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    width:50%;
     display: flex;
     justify-content:center;
     align-items: center;
     background-color:rgb(39, 39, 41);
+}
+
+#right_container{
+  width:25%;
+  display:flex;
+  justify-content:center;
+
 }
 
 .slick-arrow{
@@ -204,13 +233,7 @@ h1{
         transform:scale(1.15);
     }
 }
- 
 
-@keyframes opacity-animation{
-    0%   {opacity:1;}
-    50%  {opacity: 0;}
-    100% {opacity:1;}
-}
 
 @keyframes appear-animation{
     0%   {opacity:0;}
@@ -230,17 +253,13 @@ h1{
 .disappear{
     animation-name:disappear-animation;
     animation-duration : 1.5s;
-}
-
-.container_animation{
-    animation-name:opacity-animation;
-    animation-duration : 1.5s;
+    animation-fill-mode:forwards;
 }
 
 #planet_container{
     display:flex;
     justify-content: space-around;
-    width: 600px;
+    width: 550px;
     height: 300px;
     margin:auto;
     padding:15px;
@@ -258,60 +277,75 @@ h1{
   }
 
 #globe {
-    /* [1] Allow it to contain the absolutely positions pseudo-elements (later-on) */
     position: relative;
-  
-    /* [2] Set-up the dimensions and spacing */
     width: 250px;
     height: 250px;
     margin: 3em auto;
-  
-    /* [3] Prepare the animation effects */
     transition: transform 200ms linear;
-    animation: rotate 8s linear infinite; /* This is going to be defined in the next step */
-  
+    animation: rotate 8s linear infinite; 
     border-radius: 50%;
     background-size: 630px;
     background-image: radial-gradient(var(--first_globe_color) 30%,var(--second_globe_color) 55%, var(--third_globe_color) 100%);
     box-shadow: inset 20px 0 80px 6px rgba(0, 0, 0, 1);
-  
-    /* [5] Position things in a 3d space */
     transform-style: preserve-3d;
   }
 
   #globe::after {
-    /* [1] Break the flow to show this as an overlay */
     position: absolute;
     top: 0;
     left: 0;
-  
-    /* [2] Make it take all the space available in the box (ahem... globe!) */
     width: 100%;
     height: 100%;
-  
-    /* [3] Make sure this has no generated content, as we want this just for fancy purposes */
     content: '';
-  
-    /* [4] Give it some shape and shadow */
     border-radius: 50%;
     box-shadow: -80px 15px 80px 10px rgba(0,0,0,.9) inset;
   }
 
   #globe::before {
-    /* [1] Again, break the flow to show this as an overlay */
     position: absolute;
     top: 0;
     left: 0;
-  
-    /* [2] Again, give it all the available space */
     width: 100%;
     height: 100%;
-  
-    /* [3] Duh. */
     content: '';
-  
-    /* [4] Add some shape and overlay effect to it */
     opacity: .2;
     border-radius: 50%;
     background: radial-gradient(circle at 100px 100px, #fff, #000);
+  }
+
+
+  @media screen and (max-width: 1280px) {
+    html{
+        width:100%;
+    }
+
+    #left_container, #center_container, #right_container{
+      width:auto;
+      margin:auto;
+    }
+
+    #tableau_de_bord{
+        flex-direction: column;
+    }
+  }
+
+  
+  @media screen and (max-width: 710px) {
+
+    #planet_container{
+        flex-direction: column;
+        width: auto;
+        height: auto;
+    }
+
+    #screen_text_container{
+      height:auto;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    #globe {
+      width: 150px;
+      height: 150px;
+    }
   }
