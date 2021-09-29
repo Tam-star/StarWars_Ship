@@ -5,6 +5,8 @@ Its only purpose is to practice with CSS animations.
 
 Technologies used : Javascript, Sass and HTML. 
 
+API for Planets Info : https://swapi.dev/ 
+
 For the fonts :
 - https://www.1001freefonts.com/star-jedi.font
 - https://www.1001freefonts.com/another-typewriter.font
