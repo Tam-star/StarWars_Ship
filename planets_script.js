@@ -193,11 +193,5 @@ for(let i=0;i<mystars.length;i++){
     mystars[i].style.setProperty('left', left+"%");
 }
 
-//TO DO
-//I want the animation of the stars to be random
 
 getPlanet(planet_id);
-// document.querySelector("body").removeChild(tableau_de_bord);
-// window_stars.style.setProperty('height','100vh');
-// window_stars.style.setProperty('margin','0');
-// document.querySelector("html").style.setProperty('margin','0');
