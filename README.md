@@ -1,3 +1,5 @@
+What it looks like : https://tam-star.github.io/StarWars_Ship/
+
 # StarWars_Ship
 
 This website is supposed to represent a dashboard of a Star Wars spaceship. It is purely fictional and absolutely useless 😊
