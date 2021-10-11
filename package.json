@@ -4,7 +4,7 @@
   "description": "",
   "main": "planets_script.js",
   "scripts": {
-    "sass": "sass --watch ./sass/star.scss:.css/sassy_star.css"
+    "sass": "sass --watch ./sass/star.scss:css/sassy_star.css"
   },
   "author": "\"\"",
   "license": "ISC"
